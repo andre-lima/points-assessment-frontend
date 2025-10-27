@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SalaryContext, SalaryDispatchContext } from './SalaryContext.tsx';
+import { SalaryContext, SalaryDispatchContext } from '../store/SalaryContext.tsx';
 
 export function useSalary() {
   return useContext(SalaryContext);

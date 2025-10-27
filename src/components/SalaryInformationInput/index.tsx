@@ -1,5 +1,7 @@
-import { useSalaryDispatch } from '../../store/hooks.ts';
+import { useSalaryDispatch } from '../../hooks/store.hooks.ts';
 import { Flex, Heading, TextField, Tooltip } from '@radix-ui/themes';
+import { Tooltip as PrimitiveTooltip } from 'radix-ui';
+
 import type { ChangeEvent, MouseEvent } from 'react';
 import type { SalaryData } from '../../models/SalaryData.ts';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
@@ -27,15 +29,17 @@ export const SalaryInformationInput = () => {
       </TextField.Root>
 
       <Flex gap="2" onClick={handleSetYear}>
-        {[2019, 2020, 2021, 2022].map((year) => (
-          <YearButton year={year} />
+        {[2019, 2020, 2021].map((year) => (
+          <YearButton key={year} year={year} />
         ))}
 
-        <Tooltip content="This year might not be available for calculations.">
-          <YearButton color="amber" year={2023}>
-            <InfoCircledIcon style={{ pointerEvents: 'none' }} />
-          </YearButton>
-        </Tooltip>
+        <PrimitiveTooltip.Provider>
+          <Tooltip content="This year is suffering from server instability. Please try again if you encounter issues.">
+            <YearButton color="amber" year={2022}>
+              <InfoCircledIcon style={{ pointerEvents: 'none' }} />
+            </YearButton>
+          </Tooltip>
+        </PrimitiveTooltip.Provider>
       </Flex>
     </Flex>
   );
