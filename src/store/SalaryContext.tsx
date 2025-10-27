@@ -3,7 +3,7 @@ import type { SalaryData } from '../models/SalaryData.ts';
 import type { ApiResponse } from '../models/Brackets.ts';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const SalaryContext = createContext<SalaryData>({ year: null, salary: null, brackets: null });
+export const SalaryContext = createContext<SalaryData>({ year: 2019, salary: null, brackets: null });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const SalaryDispatchContext = createContext<Dispatch<Action>>(() => {});
@@ -15,7 +15,7 @@ type Action =
 
 export function SalaryProvider({ children }: { children: ReactNode }) {
   const [salaryData, dispatch] = useReducer(salaryDataReducer, {
-    year: null,
+    year: 2019,
     salary: null,
     brackets: null,
   });
