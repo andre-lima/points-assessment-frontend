@@ -17,6 +17,9 @@ export const TotalTaxes = ({ taxBands }: { taxBands: AmountPerBand[] }) => {
     <Flex my="4" gap="4" direction="column">
       <Heading as="h4">Total Taxes</Heading>
       <div>
+        <Badge>Salary:</Badge> {humanFormat(salary)}$
+      </div>
+      <div>
         <Badge>Total Payable:</Badge> {humanFormat(totalPayable)}$
       </div>
       <div>
