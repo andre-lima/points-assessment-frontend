@@ -1,18 +1,23 @@
 import { createContext, type Dispatch, type ReactNode, useReducer } from 'react';
 import type { SalaryData } from '../models/SalaryData.ts';
+import type { ApiResponse } from '../models/Brackets.ts';
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const SalaryContext = createContext<SalaryData>({ year: 2019, salary: null });
+export const SalaryContext = createContext<SalaryData>({ year: 2019, salary: null, brackets: null });
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const SalaryDispatchContext = createContext<Dispatch<Action>>(() => {});
 
-type Action = { type: 'set_year'; payload: SalaryData['year'] } | { type: 'set_salary'; payload: SalaryData['salary'] };
+type Action =
+  | { type: 'set_year'; payload: SalaryData['year'] }
+  | { type: 'set_salary'; payload: SalaryData['salary'] }
+  | { type: 'set_brackets'; payload: ApiResponse['tax_brackets'] | null };
 
 export function SalaryProvider({ children }: { children: ReactNode }) {
   const [salaryData, dispatch] = useReducer(salaryDataReducer, {
     year: 2019,
     salary: null,
+    brackets: null,
   });
 
   return (
@@ -29,6 +34,9 @@ function salaryDataReducer(salaryData: SalaryData, action: Action): SalaryData {
     }
     case 'set_salary': {
       return { ...salaryData, salary: action.payload };
+    }
+    case 'set_brackets': {
+      return { ...salaryData, brackets: action.payload };
     }
     default: {
       console.error('Unknown action');
