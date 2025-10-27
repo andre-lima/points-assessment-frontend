@@ -1,12 +1,13 @@
 import { useSalary, useSalaryDispatch } from '../../hooks/store.hooks.ts';
-import { Flex, Spinner } from '@radix-ui/themes';
+import { Flex, Heading, Spinner } from '@radix-ui/themes';
 import { useBracketsForTaxationYear } from '../../hooks/api.hooks.ts';
 import { useEffect } from 'react';
 import { ErrorMessage } from '../ErrorMessage';
 import type { AxiosError } from 'axios';
+import { ShowTaxInformation } from '../ShowTaxInformation';
 
 export const TaxesCalculationResults = () => {
-  const { year, salary, brackets } = useSalary();
+  const { year } = useSalary();
   const { data, error, isLoading, isSuccess, isError, refetch } = useBracketsForTaxationYear();
   const dispatch = useSalaryDispatch();
 
@@ -24,9 +25,10 @@ export const TaxesCalculationResults = () => {
 
   return (
     <Flex mt="4" p="4" gap="4" direction="column">
-      {year} {salary} {JSON.stringify(brackets)}
+      <Heading>Taxation Calculation Results for {year || '...'}</Heading>
       <Spinner loading={isLoading} />
       {error && <ErrorMessage error={error as AxiosError} onRetry={refetch}></ErrorMessage>}
+      <ShowTaxInformation />
     </Flex>
   );
 };

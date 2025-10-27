@@ -18,12 +18,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Theme accentColor="indigo" appearance={isDark ? 'dark' : 'light'}>
         <SalaryProvider>
-          <Flex p="2" direction={'column'}>
+          <Flex p="4" direction={'column'}>
             <Flex direction={'column'} gap="2">
               <Title />
               <DarkModeToggle isDark={isDark} setIsDark={setIsDark} />
             </Flex>
-            <Grid columns="1fr 2fr" gap="4" width="auto">
+            <Grid columns="2fr 3fr" gap="4" width="auto">
               <SalaryInformationInput />
               <TaxesCalculationResults />
             </Grid>
