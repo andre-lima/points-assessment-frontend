@@ -36,7 +36,7 @@ export const ShowTaxInformation = () => {
     <Container>
       <TotalTaxes taxBands={taxBands} />
       <Heading mb="3" as="h4">
-        Break down per band
+        Breakdown per bracket
       </Heading>
       <Grid columns="1fr" rows="1fr">
         {taxBands?.map((band, index) => (
